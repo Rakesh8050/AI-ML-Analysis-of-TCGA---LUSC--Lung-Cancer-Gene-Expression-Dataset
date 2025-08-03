@@ -99,10 +99,10 @@
                             <h4 class="text-xl font-bold text-blue-700 mt-6 mb-4">Confusion Matrices</h4>
                             <p>These were used to visualize the performance of each classification model. A confusion matrix provides a detailed breakdown of correct and incorrect predictions, showing the number of true positives, true negatives, false positives, and false negatives. This is crucial for understanding a model's accuracy in distinguishing between the 'normal' and 'tumor' classes.</p>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
-                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">Logistic Regression</h5><img  conf_matrix_lr " alt="Logistic Regression Confusion Matrix" class="rounded shadow-md border border-blue-200"></div>
-                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">K-Nearest Neighbors</h5><img  conf_matrix_knn " alt="KNN Confusion Matrix" class="rounded shadow-md border border-blue-200"></div>
-                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">Random Forest</h5><img  conf_matrix_rf " alt="Random Forest Confusion Matrix" class="rounded shadow-md border border-blue-200"></div>
-                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">XGBoost</h5><img  conf_matrix_xgb " alt="XGBoost Confusion Matrix" class="rounded shadow-md border border-blue-200"></div>
+                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">Logistic Regression</h5><img src="images/conf_matrix_lr.png" alt="Logistic Regression Confusion Matrix" class="rounded shadow-md border border-blue-200"></div>
+                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">K-Nearest Neighbors</h5><img src="images/conf_matrix_knn.png" alt="KNN Confusion Matrix" class="rounded shadow-md border border-blue-200"></div>
+                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">Random Forest</h5><img src="images/conf_matrix_rf.png" alt="Random Forest Confusion Matrix" class="rounded shadow-md border border-blue-200"></div>
+                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">XGBoost</h5><img src="images/conf_matrix_xgb.png" alt="XGBoost Confusion Matrix" class="rounded shadow-md border border-blue-200"></div>
                             </div>
                         </div>
 
@@ -110,7 +110,7 @@
                              <h4 class="text-xl font-bold text-blue-700 mt-6 mb-4">ROC Curves (Receiver Operating Characteristic)</h4>
                              <p>The ROC curve is a graphical plot that illustrates the diagnostic ability of a binary classifier system as its discrimination threshold is varied. We generated a combined plot to compare the Area Under the Curve (AUC) for all models, where a higher AUC represents a better measure of separability between the classes.</p>
                              <div class="grid grid-cols-1 mt-4">
-                                 <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">Comparative ROC Curve</h5><img  roc_curves_combined " alt="Comparative ROC Curve for all models" class="rounded shadow-md border border-blue-200"></div>
+                                 <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">Comparative ROC Curve</h5><img src="images/roc_curves_combined.png" alt="Comparative ROC Curve for all models" class="rounded shadow-md border border-blue-200"></div>
                              </div>
                         </div>
 
@@ -118,7 +118,7 @@
                             <h4 class="text-xl font-bold text-blue-700 mt-6 mb-4">Target Distribution</h4>
                             <p>This visualization was used to understand the class balance within our dataset. It plots the count of samples for the 'normal' and 'tumor' classes, which is essential for identifying potential biases in the data that could affect model training and evaluation. An imbalanced dataset might require special techniques like stratification, which we employed.</p>
                             <div class="grid grid-cols-1 mt-4">
-                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">Class Distribution</h5><img  target_distribution " alt="Target Class Distribution" class="rounded shadow-md border border-blue-200"></div>
+                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">Class Distribution</h5><img src="images/target_distribution.png" alt="Target Class Distribution" class="rounded shadow-md border border-blue-200"></div>
                             </div>
                         </div>
 
@@ -126,8 +126,8 @@
                             <h4 class="text-xl font-bold text-blue-700 mt-6 mb-4">Feature Importance</h4>
                             <p>For tree-based models like Random Forest and XGBoost, we plotted feature importance scores. These scores indicate which of the 120 principal components (derived from the original genes) were most influential in the model's decision-making process. This provides insights into the underlying biological signals driving the classification.</p>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
-                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">Random Forest</h5><img  feature_importance_rf " alt="Random Forest Feature Importance" class="rounded shadow-md border border-blue-200"></div>
-                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">XGBoost</h5><img  feature_importance_xgb " alt="XGBoost Feature Importance" class="rounded shadow-md border border-blue-200"></div>
+                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">Random Forest</h5><img src="images/feature_importance_rf.png" alt="Random Forest Feature Importance" class="rounded shadow-md border border-blue-200"></div>
+                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">XGBoost</h5><img src="images/feature_importance_xgb.png" alt="XGBoost Feature Importance" class="rounded shadow-md border border-blue-200"></div>
                             </div>
                         </div>
 
@@ -135,10 +135,10 @@
                             <h4 class="text-xl font-bold text-blue-700 mt-6 mb-4">Learning Curves</h4>
                             <p>Learning curves were generated for each model to diagnose potential issues like overfitting or underfitting. These plots show the model's performance on the training and validation sets over a varying number of training samples. A converging gap between the two scores indicates a well-generalized model.</p>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
-                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">Logistic Regression</h5><img  learning_curve_lr " alt="Logistic Regression Learning Curve" class="rounded shadow-md border border-blue-200"></div>
-                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">K-Nearest Neighbors</h5><img  learning_curve_knn " alt="KNN Learning Curve" class="rounded shadow-md border border-blue-200"></div>
-                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">Random Forest</h5><img  learning_curve_rf " alt="Random Forest Learning Curve" class="rounded shadow-md border border-blue-200"></div>
-                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">XGBoost</h5><img  learning_curve_xgb " alt="XGBoost Learning Curve" class="rounded shadow-md border border-blue-200"></div>
+                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">Logistic Regression</h5><img src="images/learning_curve_lr.png" alt="Logistic Regression Learning Curve" class="rounded shadow-md border border-blue-200"></div>
+                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">K-Nearest Neighbors</h5><img src="images/learning_curve_knn.png" alt="KNN Learning Curve" class="rounded shadow-md border border-blue-200"></div>
+                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">Random Forest</h5><img src="images/learning_curve_rf.png" alt="Random Forest Learning Curve" class="rounded shadow-md border border-blue-200"></div>
+                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">XGBoost</h5><img src="images/learning_curve_xgb.png" alt="XGBoost Learning Curve" class="rounded shadow-md border border-blue-200"></div>
                             </div>
                         </div>
 
@@ -146,8 +146,8 @@
                             <h4 class="text-xl font-bold text-blue-700 mt-6 mb-4">Model Comparison & Heatmaps</h4>
                             <p>A summary bar chart was created to directly compare the final balanced accuracy and precision scores of all four models. Additionally, heatmaps were used to confirm the absence of missing values post-cleaning and to visualize the correlation structure between a random sample of 100 gene features, providing a glimpse into the data's complexity.</p>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
-                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">Model Performance</h5><img  model_comparison_chart " alt="Model Comparison Bar Chart" class="rounded shadow-md border border-blue-200"></div>
-                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">Correlation Heatmap</h5><img  heatmap_correlation " alt="Correlation Heatmap" class="rounded shadow-md border border-blue-200"></div>
+                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">Model Performance</h5><img src="images/model_comparison_chart.png" alt="Model Comparison Bar Chart" class="rounded shadow-md border border-blue-200"></div>
+                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">Correlation Heatmap</h5><img src="images/heatmap_correlation.png" alt="Correlation Heatmap" class="rounded shadow-md border border-blue-200"></div>
                             </div>
                         </div>
                     </div>
@@ -171,8 +171,8 @@
                         <h3 class="text-xl font-bold text-blue-700 mt-0 mb-4">Highlight: KNN's Superior Performance</h3>
                         <p>The K-Nearest Neighbors (KNN) model consistently outperformed other models, achieving a perfect Balanced Accuracy of 1.0000 and a Precision of 0.9934. Its learning curve shows excellent generalization, and its confusion matrix reveals very few misclassifications, confirming its reliability and suitability for this dataset.</p>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
-                            <div class="border p-4 rounded-lg shadow-sm bg-white"><h4 class="font-bold text-center mb-4">KNN Confusion Matrix</h4><img src="https://placehold.co/600x400/ffffff/0c4a6e?text=conf_matrix_knn " alt="KNN Confusion Matrix" class="rounded shadow-md border border-blue-200"></div>
-                            <div class="border p-4 rounded-lg shadow-sm bg-white"><h4 class="font-bold text-center mb-4">KNN Learning Curve</h4><img src="https://placehold.co/600x400/ffffff/0c4a6e?text=learning_curve_knn " alt="KNN Learning Curve" class="rounded shadow-md border border-blue-200"></div>
+                            <div class="border p-4 rounded-lg shadow-sm bg-white"><h4 class="font-bold text-center mb-4">KNN Confusion Matrix</h4><img src="images/conf_matrix_knn.png" alt="KNN Confusion Matrix" class="rounded shadow-md border border-blue-200"></div>
+                            <div class="border p-4 rounded-lg shadow-sm bg-white"><h4 class="font-bold text-center mb-4">KNN Learning Curve</h4><img src="images/learning_curve_knn.png" alt="KNN Learning Curve" class="rounded shadow-md border border-blue-200"></div>
                         </div>
                     </div>
                 </section>
