@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TCGA Lung Cancer AI/ML Project</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Light gray background */
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Lora', serif;
+        }
+        .prose { max-width: 100%; }
+        .prose p { text-align: justify; }
+        .prose code { background-color: #e5e7eb; padding: 0.2em 0.4em; margin: 0; font-size: 85%; border-radius: 6px; }
+        .prose pre { background-color: #1e293b; color: #e2e8f0; border-radius: 8px; padding: 1.25rem; padding-top: 2rem; position: relative; overflow-x: auto; }
+        .prose pre code { background-color: transparent; padding: 0; }
+        .prose table { width: 100%; border-collapse: collapse; }
+        .prose th, .prose td { border: 1px solid #d1d5db; padding: 0.75rem 1rem; text-align: left; }
+        .prose th { background-color: #f1f5f9; font-weight: 600; }
+        .prose a { color: #2563eb; text-decoration: none; font-weight: 500; }
+        .prose a:hover { text-decoration: underline; }
+        .top-nav-link {
+            padding: 0.75rem 1rem;
+            color: #334155;
+            font-weight: 600;
+            transition: all 0.2s ease-in-out;
+            border-bottom: 4px solid transparent;
+            white-space: nowrap;
+        }
+        .top-nav-link:hover {
+            color: #1d4ed8;
+            border-bottom-color: #93c5fd;
+        }
+        .top-nav-link.active {
+            color: #1e3a8a;
+            border-bottom-color: #3b82f6;
+        }
+        section { 
+            padding-top: 5.5rem; 
+            margin-top: -4.5rem; 
+            margin-bottom: 5rem; /* Global bottom spacing */
+        }
+    </style>
+</head>
+<body class="text-slate-700">
+
+    <header class="bg-white shadow-md py-6 w-full z-20 sticky top-0">
+        <div class="max-w-screen-xl mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-slate-900">TCGA Lung Cancer AI/ML Project</h1>
+            <p class="mt-2 text-xl text-slate-600">A Project By Rakesh Kumar A</p>
+        </div>
+        <nav id="top-nav" class="bg-white border-t border-b border-slate-200 mt-6">
+            <div class="max-w-screen-xl mx-auto flex justify-center items-center overflow-x-auto">
+                 <a href="#abstract" class="top-nav-link">Abstract</a>
+                 <a href="#introduction" class="top-nav-link">Introduction</a>
+                 <a href="#methodology" class="top-nav-link">Methodology</a>
+                 <a href="#results" class="top-nav-link">Results</a>
+                 <a href="#conclusion" class="top-nav-link">Conclusion</a>
+                 <a href="#discussion" class="top-nav-link">Discussion</a>
+                 <a href="#references" class="top-nav-link">References</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="max-w-screen-xl mx-auto px-6 flex flex-col lg:flex-row gap-12">
+        <!-- Main Content -->
+        <main class="w-full">
+            <div class="bg-white shadow-lg rounded-lg p-8 md:p-12 mt-12 prose">
+
+                <section id="abstract">
+                    <h2 class="text-3xl font-semibold text-slate-800 border-l-4 border-blue-500 pl-4 mb-6">Abstract</h2>
+                    <p>This project applies machine learning models to gene expression data from TCGA to classify lung cancer samples into normal and tumor groups. Key models include Logistic Regression, KNN, Random Forest, and XGBoost. Dimensionality reduction with PCA and various performance metrics like confusion matrix, ROC, and precision are used for evaluation. The study aims to identify the most effective classification algorithm for this bioinformatics task, highlighting the potential of machine learning in diagnostics.</p>
+                </section>
+
+                <section id="introduction">
+                    <h2 class="text-3xl font-semibold text-slate-800 border-l-4 border-blue-500 pl-4 mb-6">Introduction</h2>
+                    <h3 class="text-xl font-bold text-blue-700 mt-6 mb-4">Dataset Overview</h3>
+                    <p>The foundation of this analysis is the TCGA-LUSC (Lung Squamous Cell Carcinoma) Expression Profiling by Array (Microarray) Dataset, which is publicly available from The Cancer Genome Atlas (TCGA) portal. Lung cancer is one of the deadliest cancers globally, and LUSC is one of its most common subtypes. While histologically diagnosable, expression profiles provide a powerful molecular-level tool for detection. This dataset consists of 551 patient samples, each with 56,907 different transcripts (expressed genes). A key characteristic of this dataset is its class imbalance, with 502 patients diagnosed with cancer and only 49 classified as healthy. The expression data has been normalized using TPM (Transcripts Per Kilobase Million) to ensure values are comparable across samples.</p>
+                    <h3 class="text-xl font-bold text-blue-700 mt-6 mb-4">Preprocessing Pipeline</h3>
+                    <p>Before model training, the data underwent a rigorous preprocessing pipeline which included checks for missing values, feature scaling using StandardScaler, and dimensionality reduction via Principal Component Analysis (PCA). The feature space was reduced to 120 components, which successfully retained 64.3% of the total variance. The class balance was also analyzed to ensure proper model evaluation.</p>
+                </section>
+
+                <section id="methodology">
+                    <h2 class="text-3xl font-semibold text-slate-800 border-l-4 border-blue-500 pl-4 mb-6">Methodology</h2>
+                    <p>The core of the methodology involved training and evaluating four distinct machine learning models on the preprocessed data. A stratified 70-30 train-test split was used, and a consistent random state ensured reproducibility. The evaluation framework was built around several key visualization and metric types to comprehensively assess model performance.</p>
+                    
+                    <div class="mt-8">
+                        <h3 class="text-2xl font-semibold text-slate-700 border-b-2 border-blue-200 pb-2 mb-6">Model Evaluation Metrics</h3>
+                        
+                        <div class="mb-12">
+                            <h4 class="text-xl font-bold text-blue-700 mt-6 mb-4">Confusion Matrices</h4>
+                            <p>These were used to visualize the performance of each classification model. A confusion matrix provides a detailed breakdown of correct and incorrect predictions, showing the number of true positives, true negatives, false positives, and false negatives. This is crucial for understanding a model's accuracy in distinguishing between the 'normal' and 'tumor' classes.</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
+                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">Logistic Regression</h5><img src="images/conf_matrix_lr.png" alt="Logistic Regression Confusion Matrix" class="rounded shadow-md border border-blue-200"></div>
+                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">K-Nearest Neighbors</h5><img src="images/conf_matrix_knn.png" alt="KNN Confusion Matrix" class="rounded shadow-md border border-blue-200"></div>
+                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">Random Forest</h5><img src="images/conf_matrix_rf.png" alt="Random Forest Confusion Matrix" class="rounded shadow-md border border-blue-200"></div>
+                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">XGBoost</h5><img src="images/conf_matrix_xgb.png" alt="XGBoost Confusion Matrix" class="rounded shadow-md border border-blue-200"></div>
+                            </div>
+                        </div>
+
+                        <div class="mb-12">
+                             <h4 class="text-xl font-bold text-blue-700 mt-6 mb-4">ROC Curves (Receiver Operating Characteristic)</h4>
+                             <p>The ROC curve is a graphical plot that illustrates the diagnostic ability of a binary classifier system as its discrimination threshold is varied. We generated a combined plot to compare the Area Under the Curve (AUC) for all models, where a higher AUC represents a better measure of separability between the classes.</p>
+                             <div class="grid grid-cols-1 mt-4">
+                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">Comparative ROC Curve</h5><img src="images/roc_curves_combined.png" alt="Comparative ROC Curve for all models" class="rounded shadow-md border border-blue-200"></div>
+                             </div>
+                        </div>
+
+                        <div class="mb-12">
+                            <h4 class="text-xl font-bold text-blue-700 mt-6 mb-4">Target Distribution</h4>
+                            <p>This visualization was used to understand the class balance within our dataset. It plots the count of samples for the 'normal' and 'tumor' classes, which is essential for identifying potential biases in the data that could affect model training and evaluation. An imbalanced dataset might require special techniques like stratification, which we employed.</p>
+                            <div class="grid grid-cols-1 mt-4">
+                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">Class Distribution</h5><img src="images/target_distribution.png" alt="Target Class Distribution" class="rounded shadow-md border border-blue-200"></div>
+                            </div>
+                        </div>
+
+                        <div class="mb-12">
+                            <h4 class="text-xl font-bold text-blue-700 mt-6 mb-4">Feature Importance</h4>
+                            <p>For tree-based models like Random Forest and XGBoost, we plotted feature importance scores. These scores indicate which of the 120 principal components (derived from the original genes) were most influential in the model's decision-making process. This provides insights into the underlying biological signals driving the classification.</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
+                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">Random Forest</h5><img src="images/feature_importance_rf.png" alt="Random Forest Feature Importance" class="rounded shadow-md border border-blue-200"></div>
+                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">XGBoost</h5><img src="images/feature_importance_xgb.png" alt="XGBoost Feature Importance" class="rounded shadow-md border border-blue-200"></div>
+                            </div>
+                        </div>
+
+                        <div class="mb-12">
+                            <h4 class="text-xl font-bold text-blue-700 mt-6 mb-4">Learning Curves</h4>
+                            <p>Learning curves were generated for each model to diagnose potential issues like overfitting or underfitting. These plots show the model's performance on the training and validation sets over a varying number of training samples. A converging gap between the two scores indicates a well-generalized model.</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
+                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">Logistic Regression</h5><img src="images/learning_curve_lr.png" alt="Logistic Regression Learning Curve" class="rounded shadow-md border border-blue-200"></div>
+                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">K-Nearest Neighbors</h5><img src="images/learning_curve_knn.png" alt="KNN Learning Curve" class="rounded shadow-md border border-blue-200"></div>
+                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">Random Forest</h5><img src="images/learning_curve_rf.png" alt="Random Forest Learning Curve" class="rounded shadow-md border border-blue-200"></div>
+                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">XGBoost</h5><img src="images/learning_curve_xgb.png" alt="XGBoost Learning Curve" class="rounded shadow-md border border-blue-200"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="text-xl font-bold text-blue-700 mt-6 mb-4">Model Comparison & Heatmaps</h4>
+                            <p>A summary bar chart was created to directly compare the final balanced accuracy and precision scores of all four models. Additionally, heatmaps were used to confirm the absence of missing values post-cleaning and to visualize the correlation structure between a random sample of 100 gene features, providing a glimpse into the data's complexity.</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
+                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">Model Performance</h5><img src="images/model_comparison_chart.png" alt="Model Comparison Bar Chart" class="rounded shadow-md border border-blue-200"></div>
+                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">Correlation Heatmap</h5><img src="images/heatmap_correlation.png" alt="Correlation Heatmap" class="rounded shadow-md border border-blue-200"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="results">
+                    <h2 class="text-3xl font-semibold text-slate-800 border-l-4 border-blue-500 pl-4 mb-6">Results</h2>
+                    <p class="mb-6">The empirical results from our comparative analysis provide a clear picture of model performance on the TCGA-LUSC dataset. After training and testing Logistic Regression, K-Nearest Neighbors (KNN), Random Forest, and XGBoost models on the PCA-reduced data, we evaluated their effectiveness using balanced accuracy and precision as our primary metrics. These metrics are particularly important for medical diagnostic tasks where class imbalance can be a concern and the cost of misclassification is high. The performance table below summarizes the outcomes for each model on the held-out test set. It is immediately apparent that while all models perform commendably, indicating the strong predictive power of the gene expression data, the K-Nearest Neighbors algorithm delivered exceptional results. Its ability to achieve perfect balanced accuracy and near-perfect precision sets it apart as the most effective and reliable model in this specific analytical context. This highlights its potential as a simple yet powerful tool for this type of bioinformatics classification challenge.</p>
+                    <div class="overflow-x-auto my-6">
+                        <table>
+                            <thead><tr><th>Model</th><th>Balanced Accuracy (Test)</th><th>Precision (Test)</th></tr></thead>
+                            <tbody>
+                                <tr><td>Logistic Regression</td><td>0.9567</td><td>0.9933</td></tr>
+                                <tr><td class="font-bold text-blue-700">K-Nearest Neighbors</td><td class="font-bold text-blue-700">1.0000</td><td class="font-bold text-blue-700">0.9934</td></tr>
+                                <tr><td>Random Forest</td><td>0.9333</td><td>0.9667</td></tr>
+                                <tr><td>XGBoost</td><td>0.9667</td><td>0.9869</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bg-blue-50 border border-blue-400 p-6 rounded-lg my-8">
+                        <h3 class="text-xl font-bold text-blue-700 mt-0 mb-4">Highlight: KNN's Superior Performance</h3>
+                        <p>The K-Nearest Neighbors (KNN) model consistently outperformed other models, achieving a perfect Balanced Accuracy of 1.0000 and a Precision of 0.9934. Its learning curve shows excellent generalization, and its confusion matrix reveals very few misclassifications, confirming its reliability and suitability for this dataset.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+                            <div class="border p-4 rounded-lg shadow-sm bg-white"><h4 class="font-bold text-center mb-4">KNN Confusion Matrix</h4><img src="images/conf_matrix_knn.png" alt="KNN Confusion Matrix" class="rounded shadow-md border border-blue-200"></div>
+                            <div class="border p-4 rounded-lg shadow-sm bg-white"><h4 class="font-bold text-center mb-4">KNN Learning Curve</h4><img src="images/learning_curve_knn.png" alt="KNN Learning Curve" class="rounded shadow-md border border-blue-200"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="conclusion">
+                    <h2 class="text-3xl font-semibold text-slate-800 border-l-4 border-blue-500 pl-4 mb-6">Conclusion</h2>
+                    <p>In conclusion, this project successfully demonstrates that classical machine learning models, when paired with a robust preprocessing pipeline including PCA, are highly effective for classifying TCGA lung cancer gene expression data. The key finding is the superior performance of the K-Nearest Neighbors (KNN) model, which achieved outstanding accuracy and precision. This suggests that the underlying structure of the gene expression data contains strong, discernible patterns that are well-suited for instance-based learners like KNN, which excel at finding local similarities in the feature space. The overall success underscores the critical value of data quality and methodical preprocessing in achieving high-fidelity classification in complex bioinformatics applications. The results affirm that even without resorting to more complex deep learning architectures, significant diagnostic insights can be extracted from genomic data.</p>
+                </section>
+                
+                <section id="discussion">
+                    <h2 class="text-3xl font-semibold text-slate-800 border-l-4 border-blue-500 pl-4 mb-6">Discussion</h2>
+                     <p>While the KNN model excelled, the strong performance of other models indicates the dataset's high quality and the effectiveness of the preprocessing steps. However, the study has its limitations. The models were trained on default parameters, and a systematic hyperparameter tuning process (e.g., using GridSearchCV or RandomizedSearchCV) could further enhance performance and ensure that each model is operating at its peak potential. Furthermore, the use of k-fold cross-validation would provide a more robust estimate of model generalizability than a single train-test split. For future work and potential clinical applications, this pipeline could serve as a solid baseline. Critical next steps would involve validating the best-performing model on an independent, external dataset to test its real-world efficacy. Exploring more advanced techniques, such as deep learning models (e.g., Autoencoders for feature learning or 1D-CNNs), could uncover complex non-linear relationships within the data, potentially leading to even more accurate diagnostic tools and deeper biological insights.</p>
+                </section>
+
+                <section id="references">
+                    <h2 class="text-3xl font-semibold text-slate-800 border-l-4 border-blue-500 pl-4 mb-6">References</h2>
+                    <p>The Cancer Genome Atlas Program. (n.d.). The Cancer Genome Atlas Lung Squamous Cell Carcinoma (TCGA-LUSC). National Cancer Institute. Retrieved from <a href="https://portal.gdc.cancer.gov/" target="_blank" rel="noopener noreferrer">https://portal.gdc.cancer.gov/</a></p>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <footer class="text-center py-8 text-slate-500 w-full border-t mt-12 bg-white">
+        <p>TCGA Lung Cancer Analysis | Report Generated on August 3, 2025</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('#top-nav a');
+            const observer = new IntersectionObserver((entries) => {
+                let currentSectionId = '';
+                 for (const entry of entries) {
+                    if (entry.isIntersecting) {
+                        currentSectionId = entry.target.id;
+                        break;
+                    }
+                }
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === currentSectionId) {
+                        link.classList.add('active');
+                    }
+                });
+            }, { rootMargin: "-40% 0px -60% 0px" });
+            sections.forEach(section => observer.observe(section));
+        });
+    </script>
+</body>
+</html>
