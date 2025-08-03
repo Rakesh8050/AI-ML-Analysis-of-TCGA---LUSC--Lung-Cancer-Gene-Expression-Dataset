@@ -24,7 +24,7 @@ The full, interactive project is published online.
 
 ## 🔗 Dataset Link
 The TCGA-LUSC dataset is publicly available from the GDC Data Portal:
-**[TCGA - LUSC | Lung Cancer Gene Expression Dataset](https://portal.gdc.cancer.gov/](https://www.kaggle.com/datasets/noepinefrin/tcga-lusc-lung-cell-squamous-carcinoma-gene-exp/data)**
+**[TCGA - LUSC(Lung Cancer Gene Expression Dataset)](https://www.kaggle.com/datasets/noepinefrin/tcga-lusc-lung-cell-squamous-carcinoma-gene-exp/data)**
 
 ---
 
