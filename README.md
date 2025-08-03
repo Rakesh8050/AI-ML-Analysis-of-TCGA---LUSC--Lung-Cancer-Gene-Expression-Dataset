@@ -1,106 +1,28 @@
-# README.md for TCGA Lung Cancer AI/ML Project
+## AI/ML Analysis of TCGA Lung Cancer Data
+This project uses AI and Machine Learning to classify lung cancer tumors using gene expression data from The Cancer Genome Atlas (TCGA).
 
-## Overview
+## 📋 Project Overview
+The main goal is to build models that can distinguish between normal and tumor samples based on their genetic data.
 
-This project focuses on the application of Artificial Intelligence (AI) and Machine Learning (ML) techniques to analyze lung cancer data from The Cancer Genome Atlas (TCGA). The goal is to build predictive models that can classify tumor samples based on gene expression data.
+Data Source: The dataset (LUSCexpfile.csv) contains gene expression levels for various lung cancer samples.
 
-## Table of Contents
+Preprocessing: The data was cleaned, scaled, and reduced using Principal Component Analysis (PCA).
 
-- [Installation](#installation)
-- [Data](#data)
-- [Preprocessing](#preprocessing)
-- [Models](#models)
-- [Results](#results)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
+Models: Several machine learning models were trained and tested, including Logistic Regression, K-Nearest Neighbors (KNN), Random Forest, and XGBoost.
 
-## Installation
+## 🔗 Project Link
+The TCGA-LUSC dataset is publicly available from the GDC Data Portal:
+https://portal.gdc.cancer.gov/
 
-To run this project, ensure you have Python 3.x installed along with the necessary libraries. You can install the required packages using pip:
+## 🔬 About the Dataset
+This project uses the TCGA - LUSC (Lung Squamous Cell Carcinoma) dataset, which contains gene expression profiles measured by microarray.
 
-```bash
-pip install pandas numpy matplotlib seaborn scikit-learn xgboost
-```
+About LUSC: Lung Squamous Cell Carcinoma (LUSC) is one of the most common and deadliest subtypes of lung cancer. While it can be diagnosed histologically, tumors can also be detected using gene expression profiles.
 
-## Data
+Dataset Characteristics: The dataset consists of 551 patient samples. For each patient, there are 56,907 different transcripts (expressed genes). The data is imbalanced, with 502 cancer samples and only 49 healthy samples.
 
-The dataset used in this project is a CSV file containing gene expression levels for lung cancer samples. The data is structured as follows:
+Preprocessing: The data has been normalized using TPM (Transcripts Per Kilobase Million) to make gene expression levels comparable across different samples.
 
-- **Columns**: Each column represents a gene, and the last column indicates the class label (normal or tumor).
-- **Rows**: Each row corresponds to a different sample.
-
-The dataset can be loaded using Pandas:
-
-```python
-import pandas as pd
-
-data = pd.read_csv("LUSCexpfile.csv", sep=";")
-```
-
-## Preprocessing
-
-The preprocessing steps applied to the dataset include:
-
-1. **Handling Missing Values**: Checked for null values and confirmed none were present.
-2. **Feature Scaling**: Standardized the features using `StandardScaler`.
-3. **Dimensionality Reduction**: Applied Principal Component Analysis (PCA) to reduce the feature space while retaining 120 components.
-
-Example code for preprocessing:
-
-```python
-from sklearn.preprocessing import StandardScaler
-from sklearn.decomposition import PCA
-
-scaler = StandardScaler()
-X_scaled = scaler.fit_transform(X)
-
-pca = PCA(n_components=120)
-X_pca = pca.fit_transform(X_scaled)
-```
-
-## Models
-
-Several machine learning models were implemented and evaluated:
-
-- **Logistic Regression**
-- **K-Nearest Neighbors (KNN)**
-- **Random Forest Classifier**
-- **XGBoost**
-
-Each model was trained on the training set and evaluated on the test set using metrics such as balanced accuracy, precision, and confusion matrix.
-
-Example code for training a model:
-
-```python
-from sklearn.linear_model import LogisticRegression
-
-model = LogisticRegression(random_state=42)
-model.fit(X_train, y_train)
-```
-
-## Results
-
-The performance of each model was compared based on balanced accuracy and precision. The KNN model achieved the highest balanced accuracy of 1.0000 during training and 0.9934 during testing.
-
-### Model Comparison
-
-| Model                  | Balanced Accuracy | Precision |
-|------------------------|-------------------|-----------|
-| Logistic Regression     | 0.9567            | 0.9933    |
-| K-Nearest Neighbors     | 1.0000            | 0.9934    |
-| Random Forest           | 0.9333            | 0.9667    |
-| XGBoost                | 0.9667            | 0.9869    |
-
-## Usage
-
-To use this project, clone the repository and run the main script after ensuring all dependencies are installed:
-
-```bash
-git clone https://github.com/yourusername/tcga-lung-cancer-ai-ml.git
-cd tcga-lung-cancer-ai-ml
-python main.py
-```
 
 ## Contributing
 
