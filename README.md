@@ -1,4 +1,4 @@
-## AI/ML Analysis of TCGA Lung Cancer Data
+## AI/ML Analysis of TCGA - LUSC | Lung Cancer Gene Expression Dataset
 This project uses AI and Machine Learning to classify lung cancer tumors using gene expression data from The Cancer Genome Atlas (TCGA).
 
 ---
@@ -14,9 +14,17 @@ Models: Several machine learning models were trained and tested, including Logis
 
 ---
 
-## 🔗 Project Link
+### 📄 Live Project
+
+The full, interactive project is published online.
+
+**[Live Project](https://rakesh8050.github.io/TCGA_lung_cancer-/)** 
+
+---
+
+## 🔗 Dataset Link
 The TCGA-LUSC dataset is publicly available from the GDC Data Portal:
-https://portal.gdc.cancer.gov/
+**[TCGA - LUSC | Lung Cancer Gene Expression Dataset](https://portal.gdc.cancer.gov/](https://www.kaggle.com/datasets/noepinefrin/tcga-lusc-lung-cell-squamous-carcinoma-gene-exp/data)**
 
 ---
 
