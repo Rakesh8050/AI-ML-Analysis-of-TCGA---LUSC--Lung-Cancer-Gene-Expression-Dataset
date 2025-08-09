@@ -18,7 +18,7 @@ Models: Several machine learning models were trained and tested, including Logis
 
 The full, interactive project is published online.
 
-**[Live Project](https://rakesh8050.github.io/TCGA_lung_cancer-/)** 
+**[Live Project](https://rakesh8050.github.io/AI-ML-Analysis-of-TCGA---LUSC--Lung-Cancer-Gene-Expression-Dataset/)** 
 
 ---
 
