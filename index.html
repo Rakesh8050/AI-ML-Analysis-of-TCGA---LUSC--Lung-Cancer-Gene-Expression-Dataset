@@ -42,16 +42,87 @@
             color: #1e3a8a;
             border-bottom-color: #3b82f6;
         }
-        section { 
-            padding-top: 5.5rem; 
-            margin-top: -4.5rem; 
-            margin-bottom: 5rem; /* Global bottom spacing */
+        /* Global section padding and margin for scroll-spy */
+        section {
+            padding-top: 5.5rem;
+            margin-top: -4.5rem;
+            margin-bottom: 3rem;
+            /* Styles for scroll animation */
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Added gallery image cursor */
+        .results-gallery img {
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+        .results-gallery img:hover {
+            transform: scale(1.03);
+        }
+        /* Added lightbox styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 85%;
+            border-radius: 8px;
+            animation: zoomIn 0.3s ease;
+        }
+        @keyframes zoomIn {
+            from { transform: scale(0.9); }
+            to { transform: scale(1); }
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        .lightbox-close:hover {
+            color: #bbb;
+        }
+        /* Added footer styles */
+        .footer-links a {
+            color: #475569;
+            text-decoration: none;
+        }
+        .footer-links a:hover {
+            color: #1e40af;
+            text-decoration: underline;
+        }
+        .footer-separator {
+            color: #cbd5e1;
+            margin: 0 0.5rem;
         }
     </style>
 </head>
 <body class="text-slate-700">
 
-    <!-- I removed the 'sticky' and 'top-0' classes from the header to fix the scrolling issue. -->
+    <!-- Header remains the same -->
     <header class="bg-white shadow-md py-6 w-full z-20">
         <div class="max-w-screen-xl mx-auto px-6 text-center">
             <h1 class="text-4xl md:text-5xl font-bold text-slate-900">AI/ML Analysis of TCGA - LUSC | Lung Cancer Gene Expression Dataset</h1>
@@ -59,13 +130,13 @@
         </div>
         <nav id="top-nav" class="bg-white border-t border-b border-slate-200 mt-6">
             <div class="max-w-screen-xl mx-auto flex justify-center items-center overflow-x-auto">
-                 <a href="#abstract" class="top-nav-link">Abstract</a>
-                 <a href="#introduction" class="top-nav-link">Introduction</a>
-                 <a href="#methodology" class="top-nav-link">Methodology</a>
-                 <a href="#results" class="top-nav-link">Results</a>
-                 <a href="#conclusion" class="top-nav-link">Conclusion</a>
-                 <a href="#discussion" class="top-nav-link">Discussion</a>
-                 <a href="#references" class="top-nav-link">References</a>
+                <a href="#abstract" class="top-nav-link">Abstract</a>
+                <a href="#introduction" class="top-nav-link">Introduction</a>
+                <a href="#methodology" class="top-nav-link">Methodology</a>
+                <a href="#results" class="top-nav-link">Results</a>
+                <a href="#conclusion" class="top-nav-link">Conclusion</a>
+                <a href="#discussion" class="top-nav-link">Discussion</a>
+                <a href="#references" class="top-nav-link">References</a>
             </div>
         </nav>
     </header>
@@ -95,7 +166,8 @@
                     <div class="mt-8">
                         <h3 class="text-2xl font-semibold text-slate-700 border-b-2 border-blue-200 pb-2 mb-6">Model Evaluation Metrics</h3>
                         
-                        <div class="mb-12">
+                        <!-- Added 'results-gallery' class for lightbox functionality -->
+                        <div class="mb-12 results-gallery">
                             <h4 class="text-xl font-bold text-blue-700 mt-6 mb-4">Confusion Matrices</h4>
                             <p>These were used to visualize the performance of each classification model. A confusion matrix provides a detailed breakdown of correct and incorrect predictions, showing the number of true positives, true negatives, false positives, and false negatives. This is crucial for understanding a model's accuracy in distinguishing between the 'normal' and 'tumor' classes.</p>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
@@ -106,23 +178,23 @@
                             </div>
                         </div>
 
-                        <div class="mb-12">
+                        <div class="mb-12 results-gallery">
                              <h4 class="text-xl font-bold text-blue-700 mt-6 mb-4">ROC Curves (Receiver Operating Characteristic)</h4>
                              <p>The ROC curve is a graphical plot that illustrates the diagnostic ability of a binary classifier system as its discrimination threshold is varied. We generated a combined plot to compare the Area Under the Curve (AUC) for all models, where a higher AUC represents a better measure of separability between the classes.</p>
                              <div class="grid grid-cols-1 mt-4">
-                                 <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">Comparative ROC Curve</h5><img src="images/roc_curves_combined.png" alt="Comparative ROC Curve for all models" class="w-[500px] h-auto mx-auto rounded shadow-md border border-blue-200 mx-auto"></div>
+                                 <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">Comparative ROC Curve</h5><img src="images/roc_curves_combined.png" alt="Comparative ROC Curve for all models" class="w-full max-w-lg mx-auto rounded shadow-md border border-blue-200"></div>
                              </div>
                         </div>
 
-                        <div class="mb-12">
+                        <div class="mb-12 results-gallery">
                             <h4 class="text-xl font-bold text-blue-700 mt-6 mb-4">Target Distribution</h4>
                             <p>This visualization was used to understand the class balance within our dataset. It plots the count of samples for the 'normal' and 'tumor' classes, which is essential for identifying potential biases in the data that could affect model training and evaluation. An imbalanced dataset might require special techniques like stratification, which we employed.</p>
                             <div class="grid grid-cols-1 mt-4">
-                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">Class Distribution</h5><img src="images/target_distribution.png" alt="Target Class Distribution" class="w-[500px] h-auto mx-auto rounded shadow-md border border-blue-200 mx-auto"></div>
+                                <div class="border p-4 rounded-lg shadow-sm bg-blue-50 space-y-4"><h5 class="font-bold text-center text-blue-700">Class Distribution</h5><img src="images/target_distribution.png" alt="Target Class Distribution" class="w-full max-w-lg mx-auto rounded shadow-md border border-blue-200"></div>
                             </div>
                         </div>
 
-                        <div class="mb-12">
+                        <div class="mb-12 results-gallery">
                             <h4 class="text-xl font-bold text-blue-700 mt-6 mb-4">Feature Importance</h4>
                             <p>For tree-based models like Random Forest and XGBoost, we plotted feature importance scores. These scores indicate which of the 120 principal components (derived from the original genes) were most influential in the model's decision-making process. This provides insights into the underlying biological signals driving the classification.</p>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
@@ -131,7 +203,7 @@
                             </div>
                         </div>
 
-                        <div class="mb-12">
+                        <div class="mb-12 results-gallery">
                             <h4 class="text-xl font-bold text-blue-700 mt-6 mb-4">Learning Curves</h4>
                             <p>Learning curves were generated for each model to diagnose potential issues like overfitting or underfitting. These plots show the model's performance on the training and validation sets over a varying number of training samples. A converging gap between the two scores indicates a well-generalized model.</p>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
@@ -142,7 +214,7 @@
                             </div>
                         </div>
 
-                        <div>
+                        <div class="results-gallery">
                             <h4 class="text-xl font-bold text-blue-700 mt-6 mb-4">Model Comparison & Heatmaps</h4>
                             <p>A summary bar chart was created to directly compare the final balanced accuracy and precision scores of all four models. Additionally, heatmaps were used to confirm the absence of missing values post-cleaning and to visualize the correlation structure between a random sample of 100 gene features, providing a glimpse into the data's complexity.</p>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
@@ -167,7 +239,8 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="bg-blue-50 border border-blue-400 p-6 rounded-lg my-8">
+                    <!-- Added 'results-gallery' class for lightbox functionality -->
+                    <div class="bg-blue-50 border border-blue-400 p-6 rounded-lg my-8 results-gallery">
                         <h3 class="text-xl font-bold text-blue-700 mt-0 mb-4">Highlight: KNN's Superior Performance</h3>
                         <p>The K-Nearest Neighbors (KNN) model consistently outperformed other models, achieving a perfect Balanced Accuracy of 1.0000 and a Precision of 0.9934. Its learning curve shows excellent generalization, and its confusion matrix reveals very few misclassifications, confirming its reliability and suitability for this dataset.</p>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
@@ -196,30 +269,103 @@
         </main>
     </div>
 
+    <!-- NEW: Updated footer section -->
     <footer class="text-center py-8 text-slate-500 w-full border-t mt-12 bg-white">
-        <p>TCGA Lung Cancer Analysis | Report Generated on August 3, 2025</p>
+        <p class="font-semibold">&copy; 2025 Rakesh Kumar A</p>
+        <div class="footer-links mt-2">
+            <a href="mailto:1rakeshkumar098@gmail.com">1rakeshkumar098@gmail.com</a><span class="footer-separator">|</span>
+            <a href="tel:+919113274413">+91 91132 74413</a><span class="footer-separator">|</span>
+            <a href="https://github.com/Rakesh8050" target="_blank">GitHub Profile</a>
+        </div>
     </footer>
 
+    <!-- NEW: Lightbox Modal HTML -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+    </div>
+
+    <!-- NEW: Consolidated and updated script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // --- Script for active nav link on scroll ---
             const sections = document.querySelectorAll('section[id]');
             const navLinks = document.querySelectorAll('#top-nav a');
-            const observer = new IntersectionObserver((entries) => {
+            const observerOptions = {
+                rootMargin: "-40% 0px -60% 0px" // a horizontal line in the middle of the viewport
+            };
+
+            const sectionObserver = new IntersectionObserver((entries) => {
                 let currentSectionId = '';
-                 for (const entry of entries) {
-                     if (entry.isIntersecting) {
-                         currentSectionId = entry.target.id;
-                         break;
-                     }
-                 }
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        currentSectionId = entry.target.id;
+                    }
+                });
+
                 navLinks.forEach(link => {
                     link.classList.remove('active');
                     if (link.getAttribute('href').substring(1) === currentSectionId) {
                         link.classList.add('active');
                     }
                 });
-            }, { rootMargin: "-40% 0px -60% 0px" });
-            sections.forEach(section => observer.observe(section));
+            }, observerOptions);
+
+            sections.forEach(section => sectionObserver.observe(section));
+
+            // --- Script for smooth scrolling ---
+            // This is handled by `scroll-smooth` class in <html> and anchor hrefs, but this is a JS alternative
+            navLinks.forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    // Check if it's a valid hash link
+                    if (href.startsWith('#')) {
+                        e.preventDefault();
+                        document.querySelector(href).scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // --- Script for section visibility animation on scroll ---
+            const animationObserver = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(section => {
+                animationObserver.observe(section);
+            });
+            
+            // --- Script for lightbox functionality ---
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const galleryImages = document.querySelectorAll('.results-gallery img');
+            const closeBtn = document.querySelector('.lightbox-close');
+
+            galleryImages.forEach(img => {
+                img.addEventListener('click', () => {
+                    lightbox.style.display = 'flex';
+                    lightboxImg.src = img.src;
+                });
+            });
+            
+            const closeLightbox = () => {
+                lightbox.style.display = 'none';
+            }
+
+            closeBtn.addEventListener('click', closeLightbox);
+            
+            lightbox.addEventListener('click', (e) => {
+                // Close if the click is on the background, not the image itself
+                if (e.target !== lightboxImg) {
+                    closeLightbox();
+                }
+            });
         });
     </script>
 </body>
